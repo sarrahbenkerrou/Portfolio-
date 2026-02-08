@@ -15,317 +15,159 @@ body {
     font-family: 'Inter', sans-serif;
     color: var(--dark-grey);
     line-height: 1.6;
-    overflow-x: hidden;
+    background-color: var(--bg-gray);
 }
 
-/* --- Animations Keyframes --- */
+/* --- ANIMATIONS --- */
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideRight {
+@keyframes slideIn {
     from { opacity: 0; transform: translateX(-50px); }
     to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes popIn {
-    0% { transform: scale(0.8); opacity: 0; }
-    80% { transform: scale(1.05); opacity: 1; }
-    100% { transform: scale(1); }
-}
+.fade-in { animation: fadeInUp 0.8s ease-out forwards; }
+.slide-in { animation: slideIn 0.8s ease-out forwards; }
 
-/* --- Classes d'Animation --- */
-.fade-in { animation: fadeInUp 1s ease-out forwards; }
-.slide-in { animation: slideRight 0.8s ease-out forwards; }
-.pop-in { animation: popIn 0.6s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards; }
-
-
-/* --- Correction du Header --- */
+/* --- HEADER (FIXE) --- */
 header {
     background: white;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 100;
-    /* On s'assure que le header a une hauteur stable */
-    min-height: 70px; 
-}
-
-/* --- Ajustement de la section Hero pour éviter la superposition --- */
-.hero {
-    background: linear-gradient(135deg, var(--main-blue), #2c3e50);
-    color: white;
-    /* On augmente le padding-top pour compenser la hauteur du header fixe */
-    padding: 180px 20px 100px; 
-    text-align: center;
-}
-
-/* --- Media Query pour Téléphone --- */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column; /* Aligne le logo et le menu verticalement */
-        padding: 15px 5%;
-    }
-
-    nav ul {
-        margin-top: 15px;
-        justify-content: center;
-        flex-wrap: wrap; /* Évite que les liens ne sortent de l'écran */
-        gap: 10px;
-    }
-
-    nav ul li a {
-        margin-left: 10px;
-        margin-right: 10px;
-        font-size: 0.9rem;
-    }
-
-    .hero {
-        /* Plus d'espace sur mobile pour que "Saïda Benkerrou" soit bien visible */
-        padding-top: 220px; 
-    }
-    
-    .hero h1 {
-        font-size: 1.8rem;
-    }
+    z-index: 1000;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 5%;
+    align-items: center;
+    padding: 15px 5%;
     max-width: 1200px;
     margin: auto;
 }
 
-nav ul { display: flex; list-style: none; }
+.logo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--main-blue);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
 nav ul li a {
     text-decoration: none;
     color: var(--dark-grey);
-    margin-left: 20px;
-    transition: color 0.3s;
+    font-weight: 500;
+    transition: 0.3s;
 }
+
 nav ul li a:hover { color: var(--light-blue); }
 
+/* --- HERO (CORRECTIF DÉCALAGE NOM) --- */
 .hero {
-    /* On utilise rgba pour ajouter de la transparence (0.9) */
-    background: linear-gradient(135deg, rgba(26, 95, 122, 0.9), rgba(44, 62, 80, 0.9));
+    background: linear-gradient(135deg, var(--main-blue), #2c3e50);
     color: white;
-    padding: 150px 20px 100px;
+    /* Espace important en haut pour éviter que le menu ne cache ton nom */
+    padding: 160px 20px 100px; 
     text-align: center;
-    /* Le flou permet de voir l'animation bouger derrière tout en restant lisible */
-    backdrop-filter: blur(3px); 
 }
 
-.hero h1 span { color: #81d4fa; }
+.hero h1 { font-size: 2.8rem; margin-bottom: 10px; }
+.hero h1 span { font-weight: 300; }
 
-.container { max-width: 1000px; margin: auto; padding: 80px 20px; }
-
-/* Effet au survol des cartes Diplômes */
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 8px;
-    border-top: 4px solid var(--light-blue);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* --- CONTENEUR & TITRES --- */
+.container {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 0 20px;
 }
 
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-/* Tags Outils avec effet de pulsation au survol */
-.skill-tag {
-    background: #e1f5fe;
+h2 {
+    text-align: center;
+    margin-bottom: 40px;
     color: var(--main-blue);
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-weight: 600;
-    display: inline-block;
-    transition: all 0.3s;
-    cursor: default;
+    font-size: 2rem;
 }
 
-.skill-tag:hover {
-    background: var(--light-blue);
-    color: white;
-    transform: scale(1.1);
-}
-
-footer {
-    background: #222;
-    color: white;
-    text-align: center;
-    padding: 40px;
-}
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 30px;
-}
-
-.skill-category h3 {
-    color: var(--light-blue);
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-    border-left: 4px solid var(--main-blue);
-    padding-left: 10px;
-}
-
-.skill-category ul {
-    list-style: none;
-}
-
-.skill-category ul li {
-    margin-bottom: 10px;
-    position: relative;
-    padding-left: 20px;
-}
-
-.skill-category ul li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--light-blue);
-    font-weight: bold;
-}
-
-/* Style du fond animé */
-.animated-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Reste derrière le contenu */
-    background: radial-gradient(circle at center, #ffffff 0%, #f0f4f8 100%);
-    overflow: hidden;
-}
-
-.animated-bg::after {
-    content: "";
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    top: -50%;
-    left: -50%;
-    /* On crée des points plus nets pour l'aspect "Data" */
-    background-image: 
-        radial-gradient(var(--light-blue) 2px, transparent 2px),
-        radial-gradient(var(--main-blue) 2px, transparent 2px);
-    background-size: 60px 60px;
-    background-position: 0 0, 30px 30px;
-    opacity: 0.3; /* Augmenté pour meilleure visibilité */
-    animation: moveData 30s linear infinite;
-}
-
-/* Animation de mouvement lent */
-@keyframes moveData {
-    from { transform: translate(0, 0); }
-    to { transform: translate(50px, 50px); }
-}
-
-/* Ajustement pour que le texte reste lisible */
-section {
-    position: relative;
-    z-index: 1;
-}
-
-.bg-light {
-    background: rgba(248, 249, 250, 0.8) !important; /* Rend les sections légèrement transparentes */
-    backdrop-filter: blur(5px); /* Flou artistique moderne */
-}
-
-.exp-details {
-    list-style: none;
-    margin-top: 10px;
-    padding-left: 0;
-}
-
-.exp-details li {
-    font-size: 0.9em;
-    color: #555;
-    position: relative;
-    padding-left: 15px;
-    margin-bottom: 5px;
-}
-
-.exp-details li::before {
-    content: "•";
-    color: var(--light-blue);
-    position: absolute;
-    left: 0;
-    font-weight: bold;
-}
-
-/* Conteneur de la timeline */
-.timeline {
+/* --- CARTES D'EXPÉRIENCES & DIPLÔMES --- */
+.card-grid, .timeline {
     display: flex;
     flex-direction: column;
-    gap: 30px; /* Espace entre chaque carte */
-    margin-top: 40px;
-    border-left: 3px solid var(--light-blue); /* Ligne verticale de suivi */
-    padding-left: 30px;
-    margin-left: 10px;
+    gap: 20px;
 }
 
-/* Carte d'expérience individuelle */
-.exp-card {
+.card, .exp-item {
     background: white;
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    position: relative;
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    border-left: 5px solid var(--light-blue);
+    transition: 0.3s;
 }
 
-.exp-card:hover {
-    transform: translateX(10px);
-    border-left: 5px solid var(--main-blue);
+.card:hover, .exp-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
-/* Point sur la ligne de temps */
-.exp-card::before {
-    content: "";
-    position: absolute;
-    left: -41.5px;
-    top: 30px;
-    width: 20px;
-    height: 20px;
-    background: var(--main-blue);
-    border-radius: 50%;
-    border: 4px solid white;
-}
-
-.exp-date {
-    display: block;
+.date, .period {
     color: var(--light-blue);
-    font-weight: 600;
+    font-weight: bold;
     font-size: 0.9rem;
+    display: block;
     margin-bottom: 5px;
 }
 
-.company {
-    color: #666;
-    font-weight: 400;
-    font-style: italic;
-    margin-bottom: 10px;
-}
+h3 { color: var(--main-blue); margin-bottom: 5px; }
+strong { color: #555; display: block; margin-bottom: 10px; }
 
 .exp-list {
-    margin-top: 15px;
     padding-left: 20px;
     list-style-type: square;
-    color: #444;
 }
 
-.exp-list li {
-    margin-bottom: 8px;
-    line-height: 1.4;
+/* --- SKILLS (TAGS) --- */
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.skill-tag {
+    background: var(--main-blue);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+/* --- RESPONSIVE MOBILE (IMPORTANT) --- */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    nav ul {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        /* Augmente encore l'espace si le menu passe sur deux lignes sur petit écran */
+        padding-top: 200px; 
+    }
+
+    .hero h1 { font-size: 2rem; }
 }
