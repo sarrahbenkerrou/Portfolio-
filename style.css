@@ -40,7 +40,8 @@ body {
 .slide-in { animation: slideRight 0.8s ease-out forwards; }
 .pop-in { animation: popIn 0.6s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards; }
 
-/* --- Styles Généraux --- */
+
+/* --- Correction du Header --- */
 header {
     background: white;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -48,6 +49,47 @@ header {
     width: 100%;
     top: 0;
     z-index: 100;
+    /* On s'assure que le header a une hauteur stable */
+    min-height: 70px; 
+}
+
+/* --- Ajustement de la section Hero pour éviter la superposition --- */
+.hero {
+    background: linear-gradient(135deg, var(--main-blue), #2c3e50);
+    color: white;
+    /* On augmente le padding-top pour compenser la hauteur du header fixe */
+    padding: 180px 20px 100px; 
+    text-align: center;
+}
+
+/* --- Media Query pour Téléphone --- */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column; /* Aligne le logo et le menu verticalement */
+        padding: 15px 5%;
+    }
+
+    nav ul {
+        margin-top: 15px;
+        justify-content: center;
+        flex-wrap: wrap; /* Évite que les liens ne sortent de l'écran */
+        gap: 10px;
+    }
+
+    nav ul li a {
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 0.9rem;
+    }
+
+    .hero {
+        /* Plus d'espace sur mobile pour que "Saïda Benkerrou" soit bien visible */
+        padding-top: 220px; 
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+    }
 }
 
 nav {
